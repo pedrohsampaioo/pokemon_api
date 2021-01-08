@@ -7,6 +7,7 @@ defmodule PokemonApiWeb.Router do
 
   scope "/api", PokemonApiWeb do
     pipe_through :api
+    resources "/trainers", TrainersController, only: [:create]
   end
 
   # Enables LiveDashboard only for development

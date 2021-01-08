@@ -8,6 +8,5 @@ defmodule PokemonApi.Trainer.Create do
   end
 
   defp insert_into_database({:ok, changeset}), do: Repo.insert(changeset)
-
   defp insert_into_database({:error, _changeset} = error), do: error
 end
