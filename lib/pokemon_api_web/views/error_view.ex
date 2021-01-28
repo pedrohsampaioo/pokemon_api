@@ -1,6 +1,5 @@
 defmodule PokemonApiWeb.ErrorView do
   use PokemonApiWeb, :view
-  import Ecto.Changeset, only: [traverse_errors: 2]
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
@@ -15,17 +14,9 @@ defmodule PokemonApiWeb.ErrorView do
     %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
   end
 
-  def render("unprocessable_entity.json", %{result: changeset}) do
+  def render("simple_message.json", %{message: message}) do
     %{
-      message: extract_error_message(changeset)
+      message: message
     }
-  end
-
-  defp extract_error_message(changeset) do
-    traverse_errors(changeset, fn {msg, opts} ->
-      Enum.reduce(opts, msg, fn {key, value}, acc ->
-        String.replace(acc, "%{#{key}}", to_string(value))
-      end)
-    end)
   end
 end

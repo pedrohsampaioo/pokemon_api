@@ -1,29 +1,29 @@
-defmodule PokemonApi.TrainersController do
-  use PokemonApi, :controller
+defmodule PokemonApiWeb.TrainersController do
+  use PokemonApiWeb, :controller
 
-  action_fallback PokemonApi.FallbackController
+  action_fallback PokemonApiWeb.FallbackController
 
   def show(conn, %{"id" => uuid}) do
     uuid
-    |> ExMon.get_trainer()
+    |> PokemonApi.get_trainer()
     |> handle_response(conn, :ok, "get_trainer.json")
   end
 
   def create(conn, params) do
     params
-    |> ExMon.create_trainer()
+    |> PokemonApi.create_trainer()
     |> handle_response(conn, :created, "create_trainer.json")
   end
 
   def update(conn, params) do
     params
-    |> ExMon.update_trainer()
+    |> PokemonApi.update_trainer()
     |> handle_response(conn, :ok, "update_trainer.json")
   end
 
   def delete(conn, %{"id" => uuid}) do
     uuid
-    |> ExMon.delete_trainer()
+    |> PokemonApi.delete_trainer()
     |> handle_delete_response(conn)
   end
 
