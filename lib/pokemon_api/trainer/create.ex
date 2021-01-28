@@ -3,10 +3,13 @@ defmodule PokemonApi.Trainer.Create do
 
   def call(params) do
     params
-    |> Trainer.build()
-    |> insert_into_database
+    |> Trainer.build(:insert)
+    |> insert_into_database()
   end
 
-  defp insert_into_database({:ok, changeset}), do: Repo.insert(changeset)
+  defp insert_into_database({:ok, changeset}) do
+    Repo.insert(changeset)
+  end
+
   defp insert_into_database({:error, _changeset} = error), do: error
 end
